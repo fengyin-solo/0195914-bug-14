@@ -23,6 +23,8 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 
 # 复制 nginx 配置
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+# 复制统一安全响应头片段（供 nginx.conf 在各 location 中 include）
+COPY security-headers.conf /etc/nginx/snippets/security-headers.conf
 
 # 暴露端口
 EXPOSE 80
