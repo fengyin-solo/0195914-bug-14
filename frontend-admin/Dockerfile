@@ -21,8 +21,9 @@ FROM nginx:alpine
 # 复制构建产物
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# 复制 nginx 配置
+# 复制 nginx 配置及安全响应头片段（入口页与静态资源共用）
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx-security-headers.conf /etc/nginx/snippets/security-headers.conf
 
 # 暴露端口
 EXPOSE 80
